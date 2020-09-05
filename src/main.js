@@ -1,23 +1,30 @@
 window.onload = function () {
-    const keyCode = 84;
+    const keyCode = 84; // t/T
+    const insertval = 100;
     const openMenu = "#menu-container > #menu > ytd-menu-renderer > yt-icon-button";
     const openButton = "ytd-menu-popup-renderer paper-listbox paper-item";
     const closeButton = "ytd-engagement-panel-title-header-renderer ytd-button-renderer yt-icon-button";
     const transcriptionDom = "ytd-engagement-panel-section-list-renderer[visibility=ENGAGEMENT_PANEL_VISIBILITY_EXPANDED]";
     let id;
 
-
     document.addEventListener('keydown', (event) => {
 
-        // if (event.altKey && (event.keyCode === 'a' || event.key === 'A')) {
-        if (event.altKey && event.keyCode === keyCode) {
-            if (document.querySelector(transcriptionDom)) {
+        const isPressedShortcutKey = () => {
+            return event.altKey && event.keyCode === keyCode;
+        }
+        const isDomShown = () => {
+            return document.querySelector(transcriptionDom);
+        }
+
+        if (isPressedShortcutKey()) {
+            if (isDomShown()) {
+
                 // click close button
                 document.querySelector(closeButton).click();
             } else {
+
                 // open menu
                 document.querySelector(openMenu).click();
-
                 const fnc = () => {
                     if (document.querySelectorAll(openButton).length > 1) {
                         // click open button
@@ -25,7 +32,7 @@ window.onload = function () {
                         clearInterval(id);
                     }
                 };
-                id = setInterval(fnc, 100);
+                id = setInterval(fnc, insertval); // wait open button shown when menu open button pressed
             }
         }
     });

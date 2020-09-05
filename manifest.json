@@ -1,8 +1,19 @@
 {
     "manifest_version": 2,
     "name": "YoutubeTranscription",
-    "description": "open youtube transciption with shortcut key",
-    "version": "1",
+    "description": "open/close youtube transciption with shortcut key",
+    "version": "1.0",
+    "web_accessible_resources": [
+        "images/gori.ico"
+    ],
+    "icons": {
+        "16": "images/gori16.png",
+        "48": "images/gori48.png",
+        "128": "images/gori128.png"
+    },
+    "permissions": [
+        "https://www.youtube.com/watch*"
+    ],
     "content_scripts": [
         {
             "matches": [
