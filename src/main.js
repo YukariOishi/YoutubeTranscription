@@ -7,9 +7,12 @@ window.onload = function () {
     const transcriptionDom = "ytd-engagement-panel-section-list-renderer[visibility=ENGAGEMENT_PANEL_VISIBILITY_EXPANDED]";
     let id;
 
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keyup', (event) => {
 
         const isPressedShortcutKey = () => {
+            if (event.shiftKey || event.ctrlKey) {
+                return false;
+            }
             return event.altKey && event.keyCode === keyCode;
         }
         const isDomShown = () => {
@@ -17,6 +20,7 @@ window.onload = function () {
         }
 
         if (isPressedShortcutKey()) {
+
             if (isDomShown()) {
 
                 // click close button
@@ -30,8 +34,12 @@ window.onload = function () {
                         // click open button
                         document.querySelectorAll(openButton)[1].click();
                         clearInterval(id);
+                        id = null;
                     }
                 };
+                if (id) {
+                    clearInterval(id);
+                }
                 id = setInterval(fnc, insertval); // wait open button shown when menu open button pressed
             }
         }
